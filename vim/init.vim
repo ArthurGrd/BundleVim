@@ -16,9 +16,12 @@ Plug 'preservim/nerdtree' |
             \ Plug 'ryanoasis/vim-devicons' |
             \ Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plug 'ycm-core/YouCompleteMe'
+Plug 'williamboman/mason.nvim'
 Plug 'ncm2/float-preview.nvim'
 call plug#end()
 
+
+let g:ycm_global_ycm_extra_conf = '~/.config/nvim/global_extra_conf.py'
 
 set encoding=UTF-8
 
