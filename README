@@ -1,0 +1,31 @@
+Sur Linux seulement
+
+1) Exécuter sh install.sh
+   (installer nvim avant si possible (version >0.8))
+
+2) Lancer vim/nvim et :PluginInstall
+
+3) Relancer et :Mason (choisir le language utilisé)
+
+
+Raccourcis:
+
+1) Pour autocompléteur:
+    Ctrl+Space = Ouvrir manu
+    UpArrow/Shift+Tab = Choix précédent
+    DownArrow/Tab = Choix suivant
+    Enter = Valider choix
+    Ctrl+UpArrow = Remonter la doc
+    Ctrl+DownArrow = Descendre la doc
+
+2) Navigation entre buffers:
+    Shift+Arrows = changer buffer dans la direction choisie
+
+3) Naviguer entre fichiers:
+    Ctrl+N = ouvrir menu
+
+4) Terminal intégré:
+    F1 = ouvrir terminal
+
+
+Par Arthur

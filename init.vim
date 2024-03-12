@@ -46,7 +46,25 @@ lua <<EOF
 
     cmp.setup {
         mapping = {
-            ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+            ["<C-Space>"] = cmp.mapping({
+                i = function()
+                    if cmp.visible() then
+                        cmp.abort()
+                    else
+                        cmp.complete()
+                        -- cmp.select_next_item()
+                    end
+                end,
+                c = function()
+                    if cmp.visible() then
+                        cmp.close()
+                    else
+                        cmp.complete()
+                    end
+                end,
+            }),
+
+            --["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
             ["<CR>"] = cmp.mapping.confirm { select = true },
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -140,8 +158,9 @@ lua <<EOF
             native_menu = false,
         },
         completion = {
-            autocomplete = false
+            autocomplete = false,
         },
+        select_first = true,
     }
     vim.cmd [[highlight! link CmpItemAbbrMatchFuzzy Aqua]]
     vim.cmd [[highlight! link CmpItemKindText Fg]]
@@ -167,68 +186,6 @@ lua <<EOF
         }
     )
     
-    local last_echo = { false, -1, -1 }
-    local echo_timer = nil
-    local echo_timeout = 200
-    local warning_hlgroup = 'WarningMsg'
-    local error_hlgroup = 'ErrorMsg'
-    local short_line_limit = 20
-    function show_line_diagnostics()
-        vim.lsp.diagnostic.show_line_diagnostics({
-            min = vim.diagnostic.severity.Warning,
-        }, vim.fn.bufnr(''))
-    end
-    function echo_diagnostic()
-      if echo_timer then
-        echo_timer:stop()
-      end
-      echo_timer = vim.defer_fn(
-        function()
-          local line = vim.fn.line('.') - 1
-          local bufnr = vim.api.nvim_win_get_buf(0)
-          if last_echo[1] and last_echo[2] == bufnr and last_echo[3] == line then
-            return
-          end
-          local diags = vim.lsp.diagnostic.get_line_diagnostics(bufnf, line, {
-              min = vim.diagnostic.severity.Warning,
-          })
-          if #diags == 0 then
-            if last_echo[1] then
-              last_echo = { false, -1, -1 }
-              vim.api.nvim_command('echo ""')
-            end
-            return
-          end
-          last_echo = { true, bufnr, line }
-          local diag = diags[1]
-          local width = vim.api.nvim_get_option('columns') - 15
-          local lines = vim.split(diag.message, "\n")
-          local message = lines[1]
-          local trimmed = false
-          if #lines > 1 and #message <= short_line_limit then
-            message = message .. ' ' .. lines[2]
-          end
-          if width > 0 and #message >= width then
-            message = message:sub(1, width) .. '...'
-          end
-          local kind = 'warning'
-          local hlgroup = warning_hlgroup
-
-          if diag.severity == vim.lsp.protocol.DiagnosticSeverity.Error then
-            kind = 'error'
-            hlgroup = error_hlgroup
-          end
-          local chunks = {
-            { kind .. ': ', hlgroup },
-            { message }
-          }
-          vim.api.nvim_echo(chunks, false, {})
-        end,
-        echo_timeout
-      )
-    end
-    
-
 
     local lspconfig = require'lspconfig'
     require'mason-lspconfig'.setup({
@@ -268,9 +225,6 @@ lua <<EOF
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
 EOF
-
-
-autocmd CursorMoved * :lua echo_diagnostic()
 
 let g:NERDTreeGitStatusUseNerdFonts = 1
 

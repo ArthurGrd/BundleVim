@@ -16,8 +16,6 @@ Plugin 'ervandew/supertab'
 Plugin 'voldikss/vim-floaterm'
 Plugin 'preservim/nerdtree' |
             \ Plugin 'Xuyuanp/nerdtree-git-plugin' |
-            \ Plugin 'ryanoasis/vim-devicons' |
-            \ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 Plugin 'ncm2/float-preview.nvim'
 call vundle#end()
 
