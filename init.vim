@@ -183,6 +183,13 @@ lua <<EOF
             signs = false,
             underline = true,
             virtual_text = false,
+            --virtual_text = {
+            --    spacing = 7,
+            --    prefix = " << ",
+            --    -- language server's name-- 
+            --    source = "always",
+            --    severity_limit = "Warning"
+            --}
         }
     )
     
@@ -210,7 +217,7 @@ lua <<EOF
         disable_filetype = { "TelescopePrompt", "spectre_panel" },
         fast_wrap = {
             map = "<M-e>",
-            chars = { "{", "[", "(", '"', "'" },
+            chars = { "{", "[", "(", '"', "'", "<", "|" },
             pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
             offset = 0, -- Offset from pattern match
             end_key = "$",
@@ -234,6 +241,7 @@ let g:floaterm_width = 0.4
 let g:floaterm_height = 0.4
 let g:floaterm_position = 'bottomright'
 
+vnoremap y "+y
 
 tnoremap <S-Up> <C-\><C-n><C-w>k
 tnoremap <S-Down> <C-\><C-n>
