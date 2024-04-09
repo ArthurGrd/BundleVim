@@ -139,9 +139,9 @@ lua <<EOF
             end,
         },
         sources = {
+            { name = "path" },
             { name = "nvim_lsp" },
             { name = "buffer" },
-            { name = "path" },
         },
         confirm_opts = {
             behavior = cmp.ConfirmBehavior.Replace,
@@ -182,7 +182,7 @@ lua <<EOF
         vim.lsp.diagnostic.on_publish_diagnostics, {
             signs = false,
             underline = true,
-            virtual_text = false,
+            virtual_text = true,
             --virtual_text = {
             --    spacing = 7,
             --    prefix = " << ",
@@ -256,6 +256,8 @@ nnoremap <S-Left> <C-w>h
 nnoremap <S-Right> <C-w>l
 
 nnoremap <C-n> :NERDTreeToggle<CR>
+
+xnoremap * :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
 
 
 autocmd StdinReadPre * let s:std_in=1
