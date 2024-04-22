@@ -1,7 +1,14 @@
 Sur Linux seulement
 
-1) Exécuter sh install.sh
-   (installer nvim avant si possible (version >0.8))
+
+1) Compiler from source nvim > 0.8
+   https://github.com/neovim/neovim/blob/master/BUILD.md
+
+2) Vim  -> mv .vimrc dans ~/
+           mv src/* dans ~/.vim
+
+   Nvim -> mv init.vim dans ~/.config/nvim
+           mv src/* dans ~/.config.nvim
 
 2) Lancer vim/nvim et :PluginInstall
 
@@ -28,4 +35,5 @@ Raccourcis:
     F1 = ouvrir terminal
 
 
-Par Arthur
+FONT SPECIAL TREE :
+https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip

@@ -23,7 +23,10 @@ Plugin 'hrsh7th/nvim-cmp' |
 
 Plugin 'williamboman/mason.nvim' |
             \ Plugin 'neovim/nvim-lspconfig' |
-            \ Plugin 'williamboman/mason-lspconfig.nvim' |
+            \ Plugin 'williamboman/mason-lspconfig.nvim'
+
+Plugin 'gaborvecsei/usage-tracker.nvim' |
+            \ Plugin 'nvim-lua/plenary.nvim'
 call vundle#end()
 
 lua <<EOF
@@ -230,6 +233,18 @@ lua <<EOF
 
     local cmp_autopairs = require'nvim-autopairs.completion.cmp'
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+
+
+    require('usage-tracker').setup({
+        keep_eventlog_days = 60,
+        cleanup_freq_days = 30,
+        event_wait_period_in_sec = 5,
+        inactivity_threshold_in_min = 5,
+        inactivity_check_freq_in_sec = 5,
+        verbose = 0,
+        telemetry_endpoint = ""
+    })
+
 
 EOF
 
