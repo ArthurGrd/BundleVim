@@ -34,6 +34,15 @@ Raccourcis:
 4) Terminal intégré:
     F1 = ouvrir terminal
 
+5) Prise de notes sur projet git:
+   Ctrl+B/Ctl+b = Ouvrir menu de notes de la branche
+   Ctrl+B/Ctrl+Enter = Check une checkbox
+
+6) Highlight des lignes avec couleur:
+   Ctrl+H/Ctrl+H = Coloriser la ligne actuelle
+   Ctrl+H/Ctrl+A = Changer de couleur
+   Ctrl+H/Ctrl+R = Undo la couleur
+
 
 FONT SPECIAL TREE :
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip
