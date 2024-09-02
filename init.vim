@@ -2,14 +2,15 @@ set number
 syntax on
 filetype plugin indent on
 set autoindent expandtab tabstop=4 shiftwidth=4
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'medium'
+colorscheme retrobox
 set encoding=UTF-8
 set rtp+=~/.config/nvim/bundle/Vundle.vim
+
 call vundle#begin()
-Plugin 'junegunn/goyo.vim'
+Plugin 'szw/vim-maximizer'
 Plugin 'windwp/nvim-autopairs'
 Plugin 'voldikss/vim-floaterm'
+
 Plugin 'preservim/nerdtree' |
             \ Plugin 'Xuyuanp/nerdtree-git-plugin' |
             \ Plugin 'ryanoasis/vim-devicons' |
@@ -24,9 +25,6 @@ Plugin 'hrsh7th/nvim-cmp' |
 Plugin 'williamboman/mason.nvim' |
             \ Plugin 'neovim/nvim-lspconfig' |
             \ Plugin 'williamboman/mason-lspconfig.nvim'
-
-Plugin 'gaborvecsei/usage-tracker.nvim' |
-            \ Plugin 'nvim-lua/plenary.nvim'
 call vundle#end()
 
 lua <<EOF
@@ -55,7 +53,6 @@ lua <<EOF
                         cmp.abort()
                     else
                         cmp.complete()
-                        -- cmp.select_next_item()
                     end
                 end,
                 c = function()
@@ -67,7 +64,6 @@ lua <<EOF
                 end,
             }),
 
-            --["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
             ["<CR>"] = cmp.mapping.confirm { select = true },
             ["<Tab>"] = cmp.mapping(function(fallback)
                 if cmp.visible() then
@@ -186,6 +182,7 @@ lua <<EOF
             signs = false,
             underline = true,
             virtual_text = true,
+            -- Uncomment for visual warnings in buffer
             --virtual_text = {
             --    spacing = 7,
             --    prefix = " << ",
@@ -199,15 +196,13 @@ lua <<EOF
 
     local lspconfig = require'lspconfig'
     require'mason-lspconfig'.setup({
-        ensure_installed = {'rust_analyzer'}
+        ensure_installed = {}
     })
     require'mason-lspconfig'.setup_handlers({
         function(server)
             lspconfig[server].setup({})
         end,
     })
-
-
 
     local autopairs = require'nvim-autopairs'
     autopairs.setup {
@@ -222,7 +217,7 @@ lua <<EOF
             map = "<M-e>",
             chars = { "{", "[", "(", '"', "'", "<", "|" },
             pattern = string.gsub([[ [%'%"%)%>%]%)%}%,] ]], "%s+", ""),
-            offset = 0, -- Offset from pattern match
+            offset = 0,
             end_key = "$",
             keys = "qwertyuiopzxcvbnmasdfghjkl",
             check_comma = true,
@@ -234,19 +229,8 @@ lua <<EOF
     local cmp_autopairs = require'nvim-autopairs.completion.cmp'
     cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 
-
-    require('usage-tracker').setup({
-        keep_eventlog_days = 60,
-        cleanup_freq_days = 30,
-        event_wait_period_in_sec = 5,
-        inactivity_threshold_in_min = 5,
-        inactivity_check_freq_in_sec = 5,
-        verbose = 0,
-        telemetry_endpoint = ""
-    })
-
-
 EOF
+
 
 let g:NERDTreeGitStatusUseNerdFonts = 1
 
@@ -272,6 +256,9 @@ nnoremap <S-Right> <C-w>l
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+nnoremap <C-f> :MaximizerToggle<CR>
+tnoremap <C-f> <C-\><C-n>:MaximizerToggle<CR>
+
 xnoremap * :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
 
 
@@ -283,4 +270,3 @@ autocmd VimEnter * if argc() == 0 |
             \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | wincmd p | endif
 
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-

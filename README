@@ -1,7 +1,11 @@
-Sur Linux seulement
+(Testé uniquement sur Linux)
 
+Ce bundle a été conçu pour nvim > 0.8
+Sinon il est possible d'utiliser vim mais il n'y aura pas d'autocomplétion
 
-1) Compiler from source nvim > 0.8
+--------------------------------------------------------------------------
+
+1) Compiler nvim > 0.8
    https://github.com/neovim/neovim/blob/master/BUILD.md
 
 2) Vim  -> mv .vimrc dans ~/
@@ -10,10 +14,12 @@ Sur Linux seulement
    Nvim -> mv init.vim dans ~/.config/nvim
            mv src/* dans ~/.config.nvim
 
-2) Lancer vim/nvim et :PluginInstall
+3) Lancer vim/nvim et :PluginInstall
 
-3) Relancer et :Mason (choisir le language utilisé)
+4) (Nvim seulement)
+   Relancer et :Mason (choisir le language utilisé)
 
+--------------------------------------------------------------------------
 
 Raccourcis:
 
@@ -34,15 +40,13 @@ Raccourcis:
 4) Terminal intégré:
     F1 = ouvrir terminal
 
-5) Prise de notes sur projet git:
-   Ctrl+B/Ctl+b = Ouvrir menu de notes de la branche
-   Ctrl+B/Ctrl+Enter = Créer/Check une checkbox
+5) Focus une fenêtre:
+    Ctrl+F = maximiser le buffer actuel
 
-6) Highlight des lignes avec couleur:
-   Ctrl+H/Ctrl+H = Coloriser la ligne actuelle
-   Ctrl+H/Ctrl+A = Changer de couleur
-   Ctrl+H/Ctrl+R = Undo la couleur
+6) Recherche:
+    * = Recherche dans le fichier le mot sur lequel se trouve le curseur
 
+--------------------------------------------------------------------------
 
-FONT SPECIAL TREE :
+La font pour les symboles dans le menu des fichiers :
 https://github.com/ryanoasis/nerd-fonts/releases/download/v3.1.1/NerdFontsSymbolsOnly.zip
