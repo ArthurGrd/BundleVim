@@ -2,26 +2,24 @@ set number
 syntax on
 filetype plugin indent on
 set autoindent expandtab tabstop=4 shiftwidth=4
-colorscheme blue
-colorscheme gruvbox
-let g:gruvbox_contrast_dark = 'medium'
-set encoding=UTF-8
+set background=dark
+colorscheme retrobox
 set backspace=2
+set encoding=UTF-8
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-Plugin 'junegunn/goyo.vim'
+Plugin 'szw/vim-maximizer'
 Plugin 'Raimondi/delimitMate'
 Plugin 'ervandew/supertab'
 Plugin 'voldikss/vim-floaterm'
 Plugin 'preservim/nerdtree' |
             \ Plugin 'Xuyuanp/nerdtree-git-plugin' |
-Plugin 'ncm2/float-preview.nvim'
+            \ Plugin 'ryanoasis/vim-devicons' |
+            \ Plugin 'tiagofumo/vim-nerdtree-syntax-highlight'
 call vundle#end()
 
-let g:float_preview#docked = 0
-let g:float_preview#max_height = 40
-let g:float_preview#max_width = 75
+let g:NERDTreeGitStatusUseNerdFonts = 1
 
 let g:floaterm_keymap_toggle= '<f1>'
 let g:floaterm_title = 'term($1|$2)'
@@ -44,6 +42,10 @@ nnoremap <S-Right> <C-w>l
 
 nnoremap <C-n> :NERDTreeToggle<CR>
 
+nnoremap <C-f> :MaximizerToggle<CR>
+tnoremap <C-f> <C-\><C-n>:MaximizerToggle<CR>
+
+xnoremap * :<c-u>let @/=@"<cr>gvy:let [@/,@"]=[@",@/]<cr>/\V<c-r>=substitute(escape(@/,'/\'),'\n','\\n','g')<cr><cr>
 
 autocmd StdinReadPre * let s:std_in=1
 
@@ -53,4 +55,3 @@ autocmd VimEnter * if argc() == 0 |
             \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | wincmd p | endif
 
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
-
