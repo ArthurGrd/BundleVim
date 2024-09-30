@@ -1,0 +1,6 @@
+{
+  "suggest.autoTrigger": "none",
+  "diagnostic.virtualText": "true",
+  "diagnostic.messageTarget": "echo",
+  "inlayHint.enable": "false"
+}
